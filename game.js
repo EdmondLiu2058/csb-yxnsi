@@ -41,7 +41,9 @@ function start() {
   //create new array for bees
   bees = new Array();
   //create bees
+  document.getElementById("nbBees").addEventListener("input", makeBees);
   makeBees();
+  updateBees();
 }
 
 // Handle keyboad events
@@ -73,7 +75,8 @@ class Bee {
     //iits HTML ID
     this.id = this.htmlElement.id;
     //the left position (x)
-    this.x = this.htmlElement.offsetLeft; //the top position (y)
+    this.x = this.htmlElement.offsetLeft;
+    //the top position (y)
     this.y = this.htmlElement.offsetTop;
     this.move = function (dx, dy) {
       //move the bees by dx, dy
@@ -123,15 +126,17 @@ function createBeeImg(wNum) {
   img.style.position = "absolute";
   boardDiv.appendChild(img);
   //set initial position
-  this.getRandomInt = function (max) {
-    return Math.floor(Math.random() * max);
-  };
+
   let x = this.getRandomInt(boardDivW);
   let y = this.getRandomInt(boardDivH);
   img.style.left = boardDivX + x + "px";
   img.style.top = y + "px";
   //return the img object
   return img;
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
 
 function makeBees() {
@@ -152,4 +157,24 @@ function makeBees() {
     bees.push(bee); //add the bee object to the bees array
     i++;
   }
+}
+
+function moveBees() {
+  //get speed input field value
+  let speed = document.getElementById("speedBees").value;
+  //move each bee to a random location
+  for (let i = 0; i < bees.length; i++) {
+    let dx = getRandomInt(2 * speed) - speed;
+    let dy = getRandomInt(2 * speed) - speed;
+    bees[i].move(dx, dy);
+  }
+}
+
+function updateBees() {
+  // update loop for game //move the bees randomly
+  moveBees();
+  //use a fixed update period
+  let period = 10; //modify this to control refresh period
+  //update the timer for the next move
+  updateTimer = setTimeout("updateBees()", period);
 }
