@@ -52,7 +52,7 @@ function start() {
   lastStingTime = new Date();
   document.getElementById("duration").addEventListener("keydown", isHit);
   isHit();
-  //document.getElementById("duration").innerHTML = 0;
+  document.getElementById("duration").innerHTML;
 }
 
 // Handle keyboad events
