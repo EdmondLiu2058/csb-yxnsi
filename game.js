@@ -1,3 +1,28 @@
+function start() {
+  //create bear
+  bear = new Bear();
+  // Add an event listener to the keypress event.
+  document.addEventListener("keydown", moveBear, false);
+  //create new array for bees
+  bees = new Array();
+  //create bees
+  document.getElementById("nbBees").addEventListener("input", makeBees);
+  makeBees();
+  //update refresh period
+  document.getElementById("periodTimer").addEventListener("input", updateBees);
+  updateBees();
+  document.getElementById("hits").innerHTML;
+
+  //take start time
+  lastStingTime = new Date();
+  document.getElementById("duration").addEventListener("keydown", isHit);
+  isHit();
+  document.getElementById("duration").innerHTML;
+
+  // document.getElementById("re").addEventListener("keydown", res);
+  // res();
+}
+
 function Bear() {
   this.dBear = 100;
   this.htmlElement = document.getElementById("bear");
@@ -31,28 +56,6 @@ function Bear() {
     if (this.y < 0) this.y = 0;
     if (this.y > h - ih) this.y = h - ih;
   };
-}
-
-function start() {
-  //create bear
-  bear = new Bear();
-  // Add an event listener to the keypress event.
-  document.addEventListener("keydown", moveBear, false);
-  //create new array for bees
-  bees = new Array();
-  //create bees
-  document.getElementById("nbBees").addEventListener("input", makeBees);
-  makeBees();
-  //update refresh period
-  document.getElementById("periodTimer").addEventListener("input", updateBees);
-  updateBees();
-  document.getElementById("hits").innerHTML = 0;
-
-  //take start time
-  lastStingTime = new Date();
-  document.getElementById("duration").addEventListener("keydown", isHit);
-  isHit();
-  document.getElementById("duration").innerHTML;
 }
 
 // Handle keyboad events
@@ -148,6 +151,11 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+function addBees() {
+  var bee = new Bee(1);
+  bees.push(bee);
+}
+
 function makeBees() {
   //get number of bees specified by the user
   let nbBees = document.getElementById("nbBees").value;
@@ -192,7 +200,7 @@ function updateBees() {
     window.alert("Invalid number of period");
     return;
   }
-  if (document.getElementById("hits").innerHTML < 1000) {
+  if (document.getElementById("hits").innerHTML <= 1000) {
     updateTimer = setTimeout("updateBees()", period);
   } else {
     window.alert("Game Over!");
@@ -243,3 +251,15 @@ function overlap(element1, element2) {
   }
   return true;
 }
+
+// function res() {
+//   document.getElementById("nbBees").addEventListener("input", makeBees).reset();
+//   makeBees();
+//   document
+//     .getElementById("periodTimer")
+//     .addEventListener("input", updateBees)
+//     .reset();
+//   updateBees();
+//   document.getElementById("hits").innerHTML.reset();
+//   document.getElementById("duration").innerHTML.reset();
+// }
