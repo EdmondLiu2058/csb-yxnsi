@@ -3,6 +3,7 @@ function start() {
   bear = new Bear();
   // Add an event listener to the keypress event.
   document.addEventListener("keydown", moveBear, false);
+
   //create new array for bees
   bees = new Array();
   //create bees
@@ -30,8 +31,13 @@ function Bear() {
   this.x = this.htmlElement.offsetLeft;
   this.y = this.htmlElement.offsetTop;
 
+  this.setSpeed = function () {
+    this.dBear = document.getElementById("speedBear").value;
+  };
+
   this.move = function (xDir, yDir) {
     this.fitBounds(); //we add this instruction to keep bear within board this.x += this.dBear * xDir;
+    this.setSpeed();
     this.x += this.dBear * xDir;
     this.y += this.dBear * yDir;
     this.display();
