@@ -33,6 +33,11 @@ function Bear() {
 
   this.setSpeed = function () {
     this.dBear = document.getElementById("speedBear").value;
+    if (isNaN(this.dBear)) {
+      //check that the input field contains a valid number
+      window.alert("Invalid number of speed");
+      return;
+    }
   };
 
   this.move = function (xDir, yDir) {
