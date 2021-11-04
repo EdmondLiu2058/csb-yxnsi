@@ -16,7 +16,7 @@ function start() {
 
   //take start time
   lastStingTime = new Date();
-  document.getElementById("duration").addEventListener("keydown", isHit);
+  document.getElementById("duration").addEventListener("keydown", moveBear);
   isHit();
   document.getElementById("duration").innerHTML;
 
@@ -70,8 +70,7 @@ function Bear() {
   };
 }
 
-// Handle keyboad events
-// to move the bear
+// Handle keyboad events to move the bear
 function moveBear(e) {
   //codes of the four keys
   const KEYUP = 38;
@@ -150,7 +149,6 @@ function createBeeImg(wNum) {
   img.style.position = "absolute";
   boardDiv.appendChild(img);
   //set initial position
-
   let x = this.getRandomInt(boardDivW);
   let y = this.getRandomInt(boardDivH);
   img.style.left = boardDivX + x + "px";
@@ -159,10 +157,12 @@ function createBeeImg(wNum) {
   return img;
 }
 
+//random int
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+//add bees button, onclick in index.html
 function addBees() {
   var bee = new Bee(1);
   bees.push(bee);
@@ -213,10 +213,11 @@ function updateBees() {
     return;
   }
   if (document.getElementById("hits").innerHTML <= 1000) {
+    //check if the stings are below 1k
     updateTimer = setTimeout("updateBees()", period);
   } else {
     window.alert("Game Over!");
-    clearTimeout(updateTimer);
+    clearTimeout(updateTimer); //when stings reaches to 1k, cleartimeout
   }
 }
 
@@ -237,7 +238,7 @@ function isHit(defender, offender) {
     } else {
       if (longestDuration < thisDuration) longestDuration = thisDuration;
     }
-    document.getElementById("duration").innerHTML = longestDuration;
+    document.getElementById("duration").innerHTML = longestDuration; //display best duration
   }
 }
 
@@ -249,8 +250,8 @@ function overlap(element1, element2) {
   right1 = element1.htmlElement.offsetLeft + element1.htmlElement.offsetWidth;
   bottom1 = element1.htmlElement.offsetTop + element1.htmlElement.offsetHeight;
   //rectangle of the second element
-  left2 = element2.htmlElement.offsetLeft; //e2x
-  top2 = element2.htmlElement.offsetTop; //e2y
+  left2 = element2.htmlElement.offsetLeft;
+  top2 = element2.htmlElement.offsetTop;
   right2 = element2.htmlElement.offsetLeft + element2.htmlElement.offsetWidth;
   bottom2 = element2.htmlElement.offsetTop + element2.htmlElement.offsetHeight;
   //calculate the intersection of the two rectangles
